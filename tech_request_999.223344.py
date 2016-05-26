@@ -14,12 +14,15 @@ base = r'http://discoverpolicing.org/discover/'
 uri = r'index.cfm?fa=searchResult&city=&state=&zip=&radius=&agencyType=1&entryEducation=&authorizedFTswornLow=&authorizedFTswornHigh=50&populationLow=&populationHigh=&entryAgeMin=&entryAgeMax=&startingSalaryLow=&startingSalaryHigh=&startrow=1'
 seed = base + uri
 
-def get_headings(seed):
+def opener(seed):
     target = urllib.request.urlopen(seed)
     new_target = target.read()
-    data = new_target.decode("utf-8")
-    soup = BeautifulSoup(data, "html.parser")
+    output = new_target.decode("utf-8")
+    return output
 
+def get_headings(seed):
+    data = opener(seed)
+    soup = BeautifulSoup(data, "html.parser")
     table = soup.find("table")
     headings = [th.get_text() for th in table.find("tr").find_all("th")]
     data_headings = headings
@@ -30,9 +33,7 @@ def get_subpages(seed, history):
     queue = []
     del queue[:]
     tmp = []
-    target = urllib.request.urlopen(seed)
-    new_target = target.read()
-    data = new_target.decode("utf-8")
+    data = opener(seed)
     soup = BeautifulSoup(data, "html.parser")
     table = soup.find("table")
     if seed not in history:
@@ -63,9 +64,7 @@ def get_data(queue, history):
             time.sleep(7)
 
             print("Processing site:", k)
-            target = urllib.request.urlopen(k)
-            new_target = target.read()
-            data = new_target.decode("utf-8")
+            data = opener(seed=k)
             soup = BeautifulSoup(data, "html.parser")
 
             table = soup.find("table")
