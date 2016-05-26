@@ -1,6 +1,6 @@
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
 import urllib
-from urllib import request, error
+from urllib import request
 import xlwt
 import time
 import re
