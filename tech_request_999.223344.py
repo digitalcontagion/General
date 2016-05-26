@@ -20,7 +20,7 @@ def get_headings(seed):
     data = new_target.decode("utf-8")
     soup = BeautifulSoup(data, "html.parser")
 
-    table = soup.find("table")#, attrs={"class": "details"})
+    table = soup.find("table")
     headings = [th.get_text() for th in table.find("tr").find_all("th")]
     data_headings = headings
     return data_headings
@@ -34,7 +34,7 @@ def get_subpages(seed, history):
     new_target = target.read()
     data = new_target.decode("utf-8")
     soup = BeautifulSoup(data, "html.parser")
-    table = soup.find("table")#, attrs={"class": "details"})
+    table = soup.find("table")
     if seed not in history:
         queue.append(seed)
     else:
@@ -68,7 +68,7 @@ def get_data(queue, history):
             data = new_target.decode("utf-8")
             soup = BeautifulSoup(data, "html.parser")
 
-            table = soup.find("table")#, attrs={"class": "details"})
+            table = soup.find("table")
             for row in table.find_all("tr")[1:]:
                 tmp = [td.get_text() for td in row.find_all("td")]
                 output.append(tmp[:-1])
