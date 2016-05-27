@@ -13,7 +13,7 @@ history = []
 base = r'http://discoverpolicing.org/discover/'
 uri = r'index.cfm?fa=searchResult&city=&state=&zip=&radius=&agencyType=1&entryEducation=&authorizedFTswornLow=&authorizedFTswornHigh=50&populationLow=&populationHigh=&entryAgeMin=&entryAgeMax=&startingSalaryLow=&startingSalaryHigh=&startrow=1'
 seed = base + uri
-
+print(seed)
 def opener(seed):
     target = urllib.request.urlopen(seed)
     new_target = target.read()
